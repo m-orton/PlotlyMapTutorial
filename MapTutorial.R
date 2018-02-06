@@ -20,6 +20,18 @@ dfTestPrivate <- read_csv(parseDoc)
 
 # Downloading directly from BOLD API
 
+#  Some tips for using the BOLD API since this is what is used to grab 
+# the relevant data needed from BOLD:
+# To see details on how to use the BOLD API, 
+# go to http://www.boldsystems.org/index.php/resources/api?type=webservices
+# We can add additional restrictions to the url, for example 
+# &instituiton=Biodiversity Institute of Ontario|York University or 
+# &marker=COI-5P if you want to specifiy an institution.
+# geo=all in the url means global but geo can be geo=Canada, for example.
+# We can also use | modifier in the url. For example, &geo=Canada|Alaska 
+# would give data for both Canada and Alaska, 
+# or taxon=Aves|Reptilia would yield data for both Aves and Reptilia.
+
 # The URL below is what is modified by the user and will determine the taxon, geographic region, 
 # etc. Example: taxon=Aves$geo=all, see above in Guidelines and Tips for more
 # information on how to use the BOLD API.
