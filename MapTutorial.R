@@ -36,9 +36,6 @@ dfTestPrivate <- read_csv(parseDoc)
 # etc. Example: taxon=Aves$geo=all, see above in Guidelines and Tips for more
 # information on how to use the BOLD API.
 
-# The read_tsv function has been modified to select only certain columns to save
-# on downloading time (just using a small example dataset):
-
 # Here I'm using cats cause I like cats
 dfTestPublic <- read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Felidae&geo=all&format=tsv")
 
@@ -98,13 +95,10 @@ dfTestPublic$hover <-
 attach(dfTestPublic)
 
 # This command will show a scatterplot map organized by coordinate data and color coded by BIN
-# Note the map wont show in RStudio, you have to click on the icon in the viewer called
-# "show in new window" -> little box with with arrow
 
 # Map with just points and Set1 qualitative color palette
 # Note: for private datasets its Lat and Lon not lat and lon
 p1 <- plot_ly(dfTestPublic, lat = lat, lon = lon, 
-        # Here I chose to use a preset color palette for my colors
         # There are many that can be found on the plotly website: Set1,Set2 for qualitative colors
         # Can also do spectral for 
         text = hover, color = bin_uri, mode = "markers", colors = "Set1", 
@@ -114,9 +108,7 @@ p1 <- plot_ly(dfTestPublic, lat = lat, lon = lon,
 
 # Map with points and gradient color palette
 p2 <- plot_ly(dfTestPublic, lat = lat, lon = lon, 
-        # Here I chose to use a preset color palette for my colors
-        # There are many that can be found on the plotly website: Set1,Set2 for qualitative colors
-        # Can also do spectral for 
+        # Doing spectral color palette for a gradient color palette
         text = hover, color = bin_uri, mode = "markers", colors = "Spectral", 
         type = 'scattergeo') %>%
   layout(geo = mapLayout, legend = list(orientation = 'h')) 
@@ -126,10 +118,9 @@ p2 <- plot_ly(dfTestPublic, lat = lat, lon = lon,
 # If using custom colors and plotting according to BIN - first determine how many colors you need
 numColors = length(unique(dfTestPublic$bin_uri))
 
-# For cats there are 8 BINs
+# For cats (Felidae) there are 8 BINs
 
 p3 <- plot_ly(dfTestPublic, lat = lat, lon = lon, 
-        # Note there are different color sets: Set1, Set2, Set3 etc. for qualitative colors
         # Here I used custom hex color codes so each BIN is a distinct color
         # you can go here for hex codes: https://www.colorcombos.com
         # choose the colors you like and then copy over the hex codes
@@ -137,7 +128,7 @@ p3 <- plot_ly(dfTestPublic, lat = lat, lon = lon,
         type = 'scattergeo') %>%
   layout(geo = mapLayout, legend = list(orientation = 'h')) # can do legend  either horizontal or vertical 'v'
 
-# plot the maps
+# plot the maps by running p1, p2 and p3
 # ***You will need to click on the icon in the viewer (bottom right corner) that
 # says "show in new window" (little box with arrow beside the refresh icon). 
 # Unfortunately, this does not show the actual map directly in Rstudio.
@@ -173,5 +164,6 @@ p3
 
 # Run this command for posting of map to plotly server 
 # must specify your map variable name and filename (what you want the map to be called)
+# p represents the plot variable you want to post
 
 # plotly_POST(p, filename = "")
