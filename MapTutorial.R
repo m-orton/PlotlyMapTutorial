@@ -141,6 +141,16 @@ p2
 
 p3
 
+# Linear regression plot (not with this data)
+# Just uncomment the commands below and try with your dataframe of choice
+# I specify hex colors here but can be easily changed
+
+
+# plotLM <- plot_ly(
+#  df, x = ~dfColumn1) %>%
+#  add_markers(y = ~dfColumn2, color = ~dfColumn3, colors = c("#009e73", "#D55E00", "#0072B2", "#CC79A7","#7F7F7F")) %>% 
+#  add_lines(x = ~dfColumn1, y = fitted(lm(dfColumn2 ~ 0 + dfColumn1, data = df)))
+
 # For more customization - can create a plotly account and upload your map data there
 # You can customize it more on the plotly website
 
